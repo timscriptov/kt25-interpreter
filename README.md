@@ -12,7 +12,7 @@
 * **Комментарии:** Поддержка однострочных комментариев (`//`).
 * **Операторы:** Поддержка арифметических, логических и операторов сравнения, а также инкремента и декремента.
 * **Присваивание:** Оператор присваивания `=` и оператор `+=`.
-* **Типы данных:** `Int`, `String`, `Bool`, `Array<T>`, `Unit`.
+* **Типы данных:** `Char`, `Int`, `String`, `Bool`, `Array<T>`, `Unit`.
 * **Вывод на консоль:** Использование функции `print`.
 * **Необязательная точка с запятой:** Символ `;` не обязателен в конце строки.
 * **Условные операторы:** `if-else`
@@ -25,6 +25,7 @@
 * **Унарный минус:** Поддержка унарного минуса для целых чисел.
 * **Интерполяция строк:** Вставка переменных и выражений в строки.
 * **Операторы `break` и `continue`:** Управление выполнением циклов.
+* **Операторы `in` и `!in`:** Проверка наличия или отсутствия элемента в коллекции.
 
 ## Структура программы
 
@@ -49,6 +50,7 @@ var y: String = "Hello";
 
 ## Типы данных
 
+* **Char:** Символ.
 * **Int:** Целые числа.
 * **String:** Строки.
 * **Bool:** Логические значения (`true`, `false`).
@@ -290,6 +292,74 @@ val b: Int = if (x > 5) { x * 2 } else { -1 };
 print("b: " + b); // Выводит 20
 ```
 
+## Операторы `in` и `!in`
+
+
+**Оператор `in`**
+
+Оператор `in` используется для проверки, содержит ли коллекция (список или диапазон) определенный элемент.
+
+**Синтаксис:**
+
+```kt
+element in collection
+```
+
+* `element`: Выражение, значение которого нужно проверить на наличие в коллекции.
+* `collection`: Выражение, представляющее собой коллекцию (список или диапазон).
+
+**Примеры:**
+
+```kt
+val numbers = arrayOf(1, 2, 3, 4, 5)
+val result1 = 3 in numbers // true
+val result2 = 6 in numbers // false
+
+val range = 1..10
+val result3 = 7 in range // true
+val result4 = 15 in range // false
+```
+
+**Оператор `!in`**
+
+Оператор `!in` является противоположностью оператора `in`. Он используется для проверки, что коллекция не содержит определенный элемент.
+
+**Синтаксис:**
+
+```kt
+element !in collection
+```
+
+* `element`: Выражение, значение которого нужно проверить на отсутствие в коллекции.
+* `collection`: Выражение, представляющее собой коллекцию (список или диапазон).
+
+```kt
+val numbers = arrayOf(1, 2, 3, 4, 5)
+val result1 = 3 !in numbers // false
+val result2 = 6 !in numbers // true
+
+val range = 1..10
+val result3 = 7 !in range // false
+val result4 = 15 !in range // true
+```
+
+**Использование в условных выражениях:**
+
+Операторы `in` и `!in` часто используются в условных выражениях:
+
+```kt
+val x: Int = 5
+if (x in 1..10) {
+    println("x находится в диапазоне от 1 до 10")
+}
+
+val name: String = "Alice"
+val array: List<String> = arrayOf("Bob", "Charlie")
+if (name !in array) {
+    println("Имя не Боб и не Чарли")
+}
+```
+
 ## Комментарии
 
 Однострочные комментарии начинаются с `//`.
@@ -304,137 +374,205 @@ val x: Int = 10;
 ```kt
 class Main {
     fun main(args: Array<String>) {
-        var counter: Int = 1;
-        counter += 1;
-        print("Counter: " + counter); // out: 2
+        testFibonacci();
+        testCounter();
+        testStringConcatenation();
+        testArrayIteration();
+        testRangeForLoops();
+        testIfElse();
+        testFunctionCalls();
+        testIfExpression();
+        testWhileLoop();
+        testDoWhileLoop();
+        testStringInterpolation();
+        testIncrementDecrement();
+        testBreakContinue();
+        testRepeatLoop();
+        testCharLiterals();
+        testInNotIn();
+    }
 
-        var text: String = "Hello";
-        text += ", world!";
-        print("Text: " + text);
-
-        val numbers: Array<Int> = arrayOf(1, 2, 3);
-        for (number in numbers) {
-            print(number);
-        }
-
-        val x: Int = 10;
-        for (i in 1..x) {
-            print(i); // Выводит числа от 1 до 10
-        }
-
-        for (i in 10 downTo 1) {
-            print(i); // Выводит числа от 10 до 1
-        }
-        
-        for (i in 1..8 step 2) {
-            print(i); // Выводит 1, 3, 5, 7
-        }
-
-        for (i in 8 downTo 1 step 2) {
-            print(i); // Выводит 8, 6, 4, 2
-        }
-        
-        for (i in 1 until 10) {
-            print(i); // Выводит 1, 2, 3, 4, 5, 6, 7, 8, 9
-        }
-
-        if (x + 2 > 5) {
-            print("x больше 5");
-        } else {
-            print("x не больше 5");
-        }
-        
-        val b: Int = if (x > 5) { x * 2 } else { -1 };
-        print("b: " + b); // Выводит 20
-
-        printMessage("Hello from Main");
-        val result: Int = add(5, 3);
-        print("Result: " + result);
-
-        val multResult: Int = Helper.multiply(4, 6);
-        print("Multiplication result: " + multResult);
-        
-        var i: Int = 0;
-        while (i < 5) {
-            print("while: " + i);
-            i += 1;
-        }
-        
-        var j: Int = 0;
-        do {
-            print("do-while: " + j);
-            j += 1;
-        } while (j < 5);
-        
+    fun testFibonacci() {
         val n: Int = 10; // Вычислить 10-е число Фибоначчи
         val result: Int = fibonacci(n);
-        print("Fibonacci(" + n + "): " + result); // Выводит Fibonacci(10): 55
+        println("Fibonacci(" + n + "): " + result); // Выводит Fibonacci(10): 55
+    }
 
+    fun testCounter() {
+        var counter: Int = 1;
+        counter += 1;
+        println("Counter: " + counter); // out: 3
+    }
+
+    fun testStringConcatenation() {
+        var text: String = "Hello";
+        text += ", world!";
+        println("Text: " + text);
+    }
+
+    fun testArrayIteration() {
+        val numbers: Array<Int> = arrayOf(1, 2, 3);
+        for (number in numbers) {
+            println(number);
+        }
+    }
+
+    fun testRangeForLoops() {
+        val x: Int = 10;
+        println("for(i in 3..x):")
+        for (i in 3..x) {
+            println(i);
+        }
+        println("for(i in 3..x step-2):")
+        for (i in 3..x step 2) {
+            println(i);
+        }
+        println("for(i in x downTo 3):")
+        for (i in x downTo 3) {
+            println(i);
+        }
+        println("for(i in x downTo 3 step-2):")
+        for (i in x downTo 3 step 2) {
+            println(i);
+        }
+        println("for(i in 1 until x):")
+        for (i in 1 until x) {
+            println(i);
+        }
+    }
+
+    fun testIfElse() {
+        val x: Int = 10;
+        if (x + 2 > 5) {
+            println("x больше 5");
+        } else {
+            println("x не больше 5");
+        }
+    }
+
+    fun testFunctionCalls() {
+        printMessage("Hello from Main");
+        val result: Int = add(5, 3);
+        println("Result: " + result);
+        val multResult: Int  = Helper.multiply(4, 6);
+        println("Multiplication result: " + multResult);
+    }
+
+    fun testIfExpression() {
+        val x: Int = 10;
+        val b: Int = if (x > 5) {
+            x * 2
+        } else { -1 };
+        println("b: " + b);
+    }
+
+    fun testWhileLoop() {
+        var i: Int = 0;
+        while (i < 5) {
+            println("while: " + i);
+            i += 1;
+        }
+    }
+
+    fun testDoWhileLoop() {
+        var j: Int = 0;
+        do {
+            println("do-while: " + j);
+            j += 1;
+        } while (j < 5);
+        var k: Int = 0;
+        while (++k < 5) {
+            println("++k: " + k);
+        }
+    }
+
+    fun testStringInterpolation() {
         val a: Int = 10;
         val b: Int = 20;
         println("a = $a, b = $b, sum = ${a + b}");
-
         val name: String = "Alice";
         println("Hello, $name!");
-        
+    }
+
+    fun testIncrementDecrement() {
+        var incrementVar: Int = 5;
+        val postfixIncrement: Int = incrementVar++;
+        println("Постфиксный инкремент: incrementVar = " + incrementVar + ", postfixIncrement = " + postfixIncrement); // Выводим результаты
+        incrementVar = 5;
+        val prefixIncrement: Int = ++incrementVar;
+        println("Префиксный инкремент: incrementVar = " + incrementVar + ", prefixIncrement = " + prefixIncrement); // Выводим результаты
+        var decrementVar: Int = 5;
+        val postfixDecrement: Int = decrementVar--;
+        println("Постфиксный декремент: decrementVar = " + decrementVar + ", postfixDecrement = " + postfixDecrement); // Выводим результаты
+        decrementVar = 5;
+        val prefixDecrement: Int = --decrementVar;
+        println("Префиксный декремент: decrementVar = " + decrementVar + ", prefixDecrement = " + prefixDecrement); // Выводим результаты
+    }
+
+    fun testBreakContinue() {
+        println("Пример for(i in 1..10) break и continue:");
+        for (i in 1..10) {
+            if (i == 5) {
+                println("continue at i = 5");
+                continue
+            }
+            if (i == 8) {
+                println("break at i = 8");
+                break
+            }
+            println(i);
+        }
+        var i4: Int = 1;
         println("Пример while() break и continue:");
-        var i4: Int = 0;
         while (i4 < 10) {
             if (i4 == 5) {
+                i4 = i4 + 1
                 println("continue at i = 5");
-                i4 = i4 + 1; // Явный инкремент i4
-                continue;
+                continue
             }
             if (i4 == 8) {
                 println("break at i = 8");
-                break;
+                break
             }
             println(i4);
             i4 = i4 + 1;
         }
-        
-        println("Пример for loop break и continue:");
-        for (i in 1..10) {
-            if (i == 5) {
-                println("continue at i = 5");
-                continue;
-            }
-            if (i == 8) {
-                println("break at i = 8");
-                break;
-            }
-            println(i);
-        }
-        
-        println("Пример do-while loop break и continue:");
-        var i5: Int = 0;
-        do {
-            if (i5 == 3) {
-                println("continue at i = 3");
-                i5 = i5 + 1;
-                continue;
-            }
-            if (i5 == 6) {
-                println("break at i = 6");
-                break;
-            }
-            println(i5);
-            i5 = i5 + 1;
-        } while (i5 < 10);
-        
+    }
+
+    fun testRepeatLoop() {
+        val r1: Int = 0
         repeat(5) {
-            println("Hello");
+            println("Repeat ${r1++}")
         }
     }
 
+    fun testCharLiterals() {
+        val myChar: Char = 'A';
+        println(myChar); // Выводит A
+        println('B'); // Выводит B
+    }
+
+    fun testInNotIn() {
+        val x: Bool = 1 in 0..9;
+        println("1 in 0..9: " + x);
+        val y: Bool = 10 in 0..9;
+        println("10 in 0..9: " + y);
+        val list: Array<Int> = arrayOf(0, 3, 6, 7, 9);
+        val z: Bool = 3 !in list;
+        println("3 !in list: " + z);
+        val w: Bool = 5 !in list;
+        println("5 !in list: " + w);
+        val v: Bool = 3 in list;
+        println("3 in list: " + v);
+    }
+
     fun printMessage(message: String) {
-        print(message);
+        println(message);
     }
 
     fun add(a: Int, b: Int): Int {
         return a + b;
     }
-    
     fun fibonacci(n: Int): Int {
         if (n <= 1) {
             return n;
